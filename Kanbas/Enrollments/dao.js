@@ -6,13 +6,11 @@ export function enrollUserInCourse(userId, courseId) {
 }
 
 export function unEnrollUserFromCourse(userId, courseId) {
-  // const { enrollments } = Database;
   enrollments.pop({ _id: Date.now(), user: userId, course: courseId }); // can I use pop 
 }
 
 export function findEnrollmentForCourse(courseId) {
-  // const { enrollments } = Database;
-  return enrollments.filter((enroll) => enroll.course === courseId);
+  return enrollments.filter((enroll) => enroll.course === courseId).filter((e) => e.user === userId);
 
 }
 

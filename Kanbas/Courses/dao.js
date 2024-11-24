@@ -7,16 +7,15 @@ export function findAllCourses() {
   return Database.courses;
 }
 export function findCoursesForEnrolledUser(userId) {
-    // const { courses, enrollments } = Database;
     const enrollemnts = enrollmentDao.getEnrollments();
 
     const enrolledCourses = courses.filter((course) =>
-      enrollments.some((enrollment) => enrollment.user === userId && enrollment.course === course._id));
+      enrollemnts.some((enrollment) => enrollment.user === userId && enrollment.course === course._id));
     return enrolledCourses;
   }
   
   export function createCourse(course) {
-    const newCourse = { ...course, _id: Date.now().toString() };
+    const newCourse = { ...course };
     Database.courses = [...Database.courses, newCourse];
     return newCourse;
   }
