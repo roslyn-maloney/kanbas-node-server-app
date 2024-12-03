@@ -1,11 +1,12 @@
 //implement routes for creating, retrieving, updating, and deleting assignments
 import * as assignmentDao from "./dao.js";
-export default function AssignmentRoutes(app) {
 
+export default function AssignmentRoutes(app) {
 // updates a assignment 
 app.put("/api/assignments/:assignmentId", async (req, res) => {
     const { assignmentId } = req.params;
     const assignmentUpdates = req.body;
+    console.log(assignmentId);
     const status = await assignmentDao.updateAssignment(assignmentId, assignmentUpdates);
     res.send(status);
 });
@@ -16,12 +17,5 @@ app.put("/api/assignments/:assignmentId", async (req, res) => {
    const status = await assignmentDao.deleteAssignment(assignmentId);
    res.send(status);
  });
-
-//finding assignments for the course
-app.get("/api/courses/:cid/assignments", (req, res) => {
-    const { cid } = req.params;
-    const assignments = assignmentDao.findAssignmentForCourse(cid);
-    res.json(assignments);
-  });
  
 } 

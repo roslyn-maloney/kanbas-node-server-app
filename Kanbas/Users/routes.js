@@ -101,7 +101,7 @@ export default function UserRoutes(app) {
       res.sendStatus(401);
       return;
     }
-    if (currentUser.role === "ADMIN") {
+    if (currentUser.role === "ADMIN" || currentUser.role === "FACULTY") {
       const courses = await courseDao.findAllCourses();
       res.json(courses);
       return;
@@ -111,6 +111,7 @@ export default function UserRoutes(app) {
       uid = currentUser._id;
     }
     const courses = await enrollmentsDao.findCoursesForUser(uid);
+    console.log(courses)
     res.json(courses);
   };
   app.get("/api/users/:uid/courses", findCoursesForUser);
